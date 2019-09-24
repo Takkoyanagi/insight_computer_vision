@@ -1,0 +1,28 @@
+mini_exercise_bike
+bosu_ball
+bench_press
+standing_calf_machine
+preacher_curl_bench
+lat_pulldown_machine
+seated_calf_machine
+kettlebell
+back_extension_machine
+elliptical_machine
+battle_rope
+medicine_ball
+arm_curl_machine
+leg_press_machine
+dip_station
+rowing_machine
+dumbbell
+curl_bar
+vibration plate
+pec_deck_machine
+treadmill
+leg_abduction_machine
+seated_row_machine
+lateral_raises_machine
+squat_cage
+hyper_extension_bench
+stationary bike
+foam_roller
