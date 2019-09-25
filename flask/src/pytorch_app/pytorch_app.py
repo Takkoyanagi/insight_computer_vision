@@ -13,21 +13,21 @@ import io
 from PIL import Image
 from flask import render_template, send_from_directory
 from flask import Flask, flash, request, redirect, url_for
+from werkzeug.utils import secure_filename
 
 # set path to templates
 template_dir = os.getcwd()
 template_dir = os.path.join(template_dir, 'templates')
+
+ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
+UPLOAD_FOLDER = './uploads'
 
 # initialize our Flask application and the Keras model
 app = Flask(__name__, template_folder=template_dir)
 
 app.secret_key = "secret key"
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
-app.config.update(dict(
-        UPLOAD_FOLDER = "./flib/static/uploads/",
-        DISPLAY_FOLDER = "./flib/static/display/",
-        TEMP_FOLDER = "./static/uploads/"
-        ))
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 # instantiate model        
 model = None
@@ -39,9 +39,6 @@ img_preprocess = transforms.Compose([
         transforms.ToTensor(),
         transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225])
     ])
-
-ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
-
 
 def _load_model():
     # load the pre-trained Pytorch model
@@ -67,23 +64,25 @@ def predict():
     # ensure an image was properly uploaded to our endpoint
     # Get the file
     if request.method == "POST":
-        #  # check if the post request has the file part
-        # if 'image' not in request.files:
-        #     flash('No file part')
-        #     return redirect(request.url)
-        # file = request.files['image']
-
-        # # if user does not select file, browser also
-        # # submit an empty part without filename
-        # if file.filename == '':
-        #     flash('No selected file')
-        #     return redirect(request.url)
-        # if file and allowed_file(file.filename):
-        if request.files.get("image"):
+         # check if the post request has the file part
+        if 'image' not in request.files:
+            flash('No Image')
+            return redirect(url_for('index'))
+        file = request.files['image']
+        file_secure = secure_filename(file.filename)
+        # if user does not select file, browser also
+        # submit an empty part without filename
+        if file_secure == '':
+            flash('No selected file')
+            return redirect(url_for('index'))
+        if not allowed_file(file_secure):
+            flash('Wrong File Format!')
+            return redirect(url_for('index'))
+        if file and allowed_file(file_secure):
             # read the image in PIL format
-            image = request.files["image"].read()
+            image = request.files['image'].read()
             image = Image.open(io.BytesIO(image))
-
+            
             # preprocess the image and prepare it for classification
             image_t = img_preprocess(image)
             batch_t = torch.unsqueeze(image_t,0)
@@ -99,13 +98,7 @@ def predict():
 
     # return the data dictionary as a JSON response
     return redirect(f"https://www.youtube.com/results?search_query={prediction}+tutorial&sp=EgIYAQ%253D%253D") 
-    # if this is the main thread of execution first load the model and
 
-# @app.route("/request", methods=["POST"])
-# def _request():
-#     return "Please go back and try again"
-
-# then start the server
 if __name__ == "__main__":
     print(("* Loading Pytorch model and Flask starting server..."
         "please wait until server has fully started"))
