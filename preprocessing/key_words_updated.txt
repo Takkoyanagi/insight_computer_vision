@@ -14,7 +14,7 @@ dip_station
 rowing_machine
 dumbbell
 curl_bar
-vibration plate
+vibration_plate
 pec_deck_machine
 treadmill
 leg_abduction_machine
@@ -22,3 +22,4 @@ seated_row_machine
 squat_cage
 hyper_extension_bench
 foam_roller
+stationary_bike
