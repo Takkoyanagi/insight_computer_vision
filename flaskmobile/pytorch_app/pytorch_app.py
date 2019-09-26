@@ -24,7 +24,10 @@ UPLOAD_FOLDER = './uploads'
 app = Flask(__name__, template_folder=template_dir)
 Mobility(app)
 
-app.secret_key = "secret key"
+with open('secret_code.txt', 'r') as f:
+    sw = f.read()
+
+app.secret_key = sw
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 

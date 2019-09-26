@@ -107,3 +107,4 @@ venv.bak/
 /chromedriver
 app/*
 keras_app/*
+secret_code.txt
