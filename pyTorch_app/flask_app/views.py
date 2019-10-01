@@ -19,13 +19,13 @@ model = None
 def _load_model():
     # load the pre-trained Pytorch model
     global model
-    model = torch.load('flask_app/static/torch_transfer_resnet_25CAT__20B_092519.pt', map_location='cpu')
+    model = torch.load('flask_app/static/torch_transfer_resnet_27CAT__20B_093019.pt', map_location='cpu')
 
 _load_model()
 
 # load the categories
 categories = []
-with open('flask_app/static/25_category_list.text', 'r') as f:
+with open('flask_app/static/27_category_list.text', 'r') as f:
     for line in f:
         line = line.strip()
         categories.append(line)

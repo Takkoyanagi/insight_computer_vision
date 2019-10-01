@@ -22,7 +22,7 @@ def predict_accuracy(path, v_files=100, filename="predict_1.csv"):
     category
     filename = name you designate for the csv file that gets created"""
     # load trained weights to model and set to evaluation mode
-    model = torch.load('./torch_transfer_resnet_25CAT__20B_092519.pt', map_location='cpu')
+    model = torch.load('./torch_transfer_resnet_25CAT__20B_092819.pt', map_location='cpu')
     model.eval()
 
     # create a list of image categories and then sort
