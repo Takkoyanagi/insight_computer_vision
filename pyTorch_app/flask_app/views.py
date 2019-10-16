@@ -19,7 +19,7 @@ model = None
 def _load_model():
     # load the pre-trained Pytorch model
     global model
-    model = torch.load('flask_app/static/torch_transfer_resnet_27CAT__20B_093019.pt', map_location='cpu')
+    model = torch.load('flask_app/static/torch_transfer_resnet_27CAT__20B_100219_no_crop.pt', map_location='cpu')
 
 _load_model()
 
