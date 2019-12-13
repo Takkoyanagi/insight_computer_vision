@@ -1,5 +1,5 @@
 # Project Title: Gym Equipment Decoder
-Webapp to help guide users to short video tutorials from pictures of gym equipment taken on their mobile devices
+Webapp to help guide users to short video tutorials from pictures of gym equipment taken on their mobile devices<br />
 [Gym equipment decoder](http://computervisionclassifier.me) <br />
 [Video presentation](https://www.youtube.com/watch?v=OmrdY8uHJoI)
 
